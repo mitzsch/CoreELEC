@@ -2,17 +2,17 @@
 # Copyright (C) 2022-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="moby"
-PKG_VERSION="28.5.2"
-PKG_SHA256="0e450c03c536a1304ba8fd26ca4c4ff96fac62182fd042fec90ffdf4a0969d40"
+PKG_VERSION="29.1.2"
+PKG_SHA256="f11949f3d8dcbcbd6d5de0b345b5ec8dbdd74572c6ce614c7b6e7551829d8035"
 PKG_LICENSE="ASL"
 PKG_SITE="https://mobyproject.org/"
-PKG_URL="https://github.com/moby/moby/archive/v${PKG_VERSION}.tar.gz"
-PKG_DEPENDS_TARGET="toolchain go:host systemd"
+PKG_URL="https://github.com/moby/moby/archive/docker-v${PKG_VERSION}.tar.gz"
+PKG_DEPENDS_TARGET="toolchain go:host nftables systemd"
 PKG_LONGDESC="Moby is an open-source project created by Docker to enable and accelerate software containerization."
 PKG_TOOLCHAIN="manual"
 
 # Git commit of the matching release https://github.com/moby/moby
-export PKG_GIT_COMMIT="89c5e8fd66634b6128fc4c0e6f1236e2540e46e0"
+export PKG_GIT_COMMIT="de45c2ae4f524290c23d4f2d979c484f158f339a"
 
 PKG_MOBY_BUILDTAGS="daemon \
                     autogen \
@@ -31,22 +31,19 @@ configure_target() {
   export VERSION=${PKG_VERSION}
   export BUILDTIME="$(date --utc)"
 
-  cat >"${PKG_BUILD}/go.mod" <<EOF
-module github.com/docker/docker
-
-go 1.18
-EOF
-
-  GO111MODULE=auto ${GOLANG} mod tidy -modfile 'vendor.mod' -compat 1.18
-  GO111MODULE=auto ${GOLANG} mod vendor -modfile vendor.mod
+  GO111MODULE=auto ${GOLANG} mod tidy -modfile 'go.mod' -compat 1.24.3
+  GO111MODULE=auto ${GOLANG} mod vendor -modfile go.mod
 
   source hack/make/.go-autogen
 }
 
 make_target() {
   mkdir -p bin
-  ${GOLANG} build -mod=mod -modfile=vendor.mod -v -o bin/docker-proxy -a -ldflags "${LDFLAGS}" ./cmd/docker-proxy
-  ${GOLANG} build -mod=mod -modfile=vendor.mod -v -o bin/dockerd -a -tags "${PKG_MOBY_BUILDTAGS}" -ldflags "${LDFLAGS}" ./cmd/dockerd
+  ${GOLANG} build -mod=mod -modfile=go.mod -v -o bin/docker-proxy -a -ldflags "${LDFLAGS}" ./cmd/docker-proxy
+  ${GOLANG} build -mod=mod -modfile=go.mod -v -o bin/dockerd -a -tags "${PKG_MOBY_BUILDTAGS}" -ldflags "${LDFLAGS}" ./cmd/dockerd
+
+  # fix permissions of .gopath to allow clean during CI build
+  chmod -R u+w .gopath
 }
 
 makeinstall_target() {

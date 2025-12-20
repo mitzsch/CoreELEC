@@ -4,7 +4,7 @@
 # Copyright (C) 2022-present Team CoreELEC (https://coreelec.tv)
 
 PKG_NAME="kodi"
-PKG_VERSION="1a4b29b8d7e20f3f8a0646b102cb7fa9f5083bb4"
+PKG_VERSION="044e711cb9d837c2322beca7c72e8a942fcb2617"
 PKG_SHA256=""
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.kodi.tv"
@@ -245,6 +245,7 @@ configure_package() {
                          -DENABLE_INTERNAL_CROSSGUID=OFF \
                          -DENABLE_INTERNAL_EXIV2=OFF \
                          -DENABLE_INTERNAL_FFMPEG=OFF \
+                         -DDISABLE_FFMPEG_SOURCE_PLUGINS=ON \
                          -DENABLE_INTERNAL_FLATBUFFERS=OFF \
                          -DENABLE_INTERNAL_NLOHMANNJSON=OFF \
                          -DENABLE_INTERNAL_SPDLOG=OFF \
