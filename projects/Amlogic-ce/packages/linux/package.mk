@@ -4,7 +4,7 @@
 # Copyright (C) 2024-present Team CoreELEC (https://coreelec.org)
 
 PKG_NAME="linux"
-PKG_VERSION="b9bf543b471737341d4ae9bbb73d19badb392757"
+PKG_VERSION="0986aec3c7ac1446a61ecc4efb3a97355be00ea3"
 PKG_SHA256=""
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.kernel.org"
