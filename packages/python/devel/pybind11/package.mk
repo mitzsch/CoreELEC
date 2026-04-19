@@ -2,8 +2,8 @@
 # Copyright (C) 2025-present Team LibreELEC (https://libreelec.tv)
 
 PKG_NAME="pybind11"
-PKG_VERSION="3.0.1"
-PKG_SHA256="741633da746b7c738bb71f1854f957b9da660bcd2dce68d71949037f0969d0ca"
+PKG_VERSION="3.0.3"
+PKG_SHA256="787459e1e186ee82001759508fefa408373eae8a076ffe0078b126c6f8f0ec5e"
 PKG_LICENSE="pybind11"
 PKG_SITE="https://github.com/pybind/pybind11"
 PKG_URL="https://github.com/pybind/pybind11/archive/refs/tags/v${PKG_VERSION}.tar.gz"

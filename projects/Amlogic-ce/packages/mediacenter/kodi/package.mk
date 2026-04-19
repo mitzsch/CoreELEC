@@ -4,7 +4,7 @@
 # Copyright (C) 2022-present Team CoreELEC (https://coreelec.tv)
 
 PKG_NAME="kodi"
-PKG_VERSION="a1635dc040d528b7c004bcf57a13aa0cc45dd6d6"
+PKG_VERSION="ca4f5945eefec2dd93c79e3493644231ad56b335"
 PKG_SHA256=""
 PKG_LICENSE="GPL"
 PKG_SITE="http://www.kodi.tv"
@@ -478,6 +478,5 @@ post_install() {
   enable_service kodi-reboot.service
   enable_service kodi-waitonnetwork.service
   enable_service kodi.service
-  enable_service kodi-lirc-suspend.service
   enable_service kodi-cleanpackagecache.service
 }
